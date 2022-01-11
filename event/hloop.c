@@ -841,6 +841,10 @@ hio_t* hio_create_socket(hloop_t* loop, const char* host, int port, hio_type_e t
                     type & HIO_TYPE_SOCK_DGRAM  ? SOCK_DGRAM :
                     type & HIO_TYPE_SOCK_RAW    ? SOCK_RAW : -1;
     if (sock_type == -1) return NULL;
+    int ip_protocol = type & HIO_TYPE_SOCK_STREAM ? IPPROTO_TCP :
+                      type & HIO_TYPE_SOCK_DGRAM  ? IPPROTO_UDP :
+                      type & HIO_TYPE_SOCK_RAW    ? IPPROTO_RAW : -1;
+    if (ip_protocol == -1) return NULL;
     sockaddr_u addr;
     memset(&addr, 0, sizeof(addr));
     int ret = -1;
@@ -857,7 +861,7 @@ hio_t* hio_create_socket(hloop_t* loop, const char* host, int port, hio_type_e t
         // fprintf(stderr, "unknown host: %s\n", host);
         return NULL;
     }
-    int sockfd = socket(addr.sa.sa_family, sock_type, 0);
+    int sockfd = socket(addr.sa.sa_family, sock_type, ip_protocol);
     if (sockfd < 0) {
         perror("socket");
         return NULL;

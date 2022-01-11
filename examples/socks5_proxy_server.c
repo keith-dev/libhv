@@ -328,7 +328,7 @@ static void on_recv(hio_t* io, void* buf, int readbytes) {
             hloop_t* loop = hevent_loop(io);
             // hio_t* upstream_io = hio_setup_tcp_upstream(io, conn->host, conn->port, 0);
             // hio_t* upstream_io = hio_create_socket(loop, conn->host, conn->port, HIO_TYPE_TCP, HIO_CLIENT_SIDE);
-            int sockfd = socket(conn->addr.sa.sa_family, SOCK_STREAM, 0);
+            int sockfd = socket(conn->addr.sa.sa_family, SOCK_STREAM, IPPROTO_TCP);
             if (sockfd < 0) {
                 perror("socket");
                 hio_close(io);

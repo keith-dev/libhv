@@ -67,7 +67,7 @@ public:
         return createsocket(&peeraddr.sa);
     }
     int createsocket(struct sockaddr* peeraddr) {
-        int connfd = socket(peeraddr->sa_family, SOCK_STREAM, 0);
+        int connfd = socket(peeraddr->sa_family, SOCK_STREAM, IPPROTO_TCP);
         // SOCKADDR_PRINT(peeraddr);
         if (connfd < 0) {
             perror("socket");

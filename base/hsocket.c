@@ -375,7 +375,7 @@ int Socketpair(int family, int type, int protocol, int sv[2]) {
     localaddr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
     localaddr.sin_port = 0;
     // listener
-    listenfd = socket(AF_INET, SOCK_STREAM, 0);
+    listenfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (listenfd < 0) {
         perror("socket");
         goto error;
@@ -393,7 +393,7 @@ int Socketpair(int family, int type, int protocol, int sv[2]) {
         goto error;
     }
     // connector
-    connfd = socket(AF_INET, SOCK_STREAM, 0);
+    connfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (connfd < 0) {
         perror("socket");
         goto error;

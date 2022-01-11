@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
     memset(&addr, 0, addrlen);
     addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
-    int listenfd = socket(AF_INET, SOCK_STREAM, 0);
+    int listenfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (listenfd < 0) {
         return -20;
     }

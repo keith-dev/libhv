@@ -37,7 +37,7 @@ int AsyncHttpClient::doTask(const HttpClientTaskPtr& task) {
 
     if (connfd < 0) {
         // create socket
-        connfd = socket(peeraddr.sa.sa_family, SOCK_STREAM, 0);
+        connfd = socket(peeraddr.sa.sa_family, SOCK_STREAM, IPPROTO_TCP);
         if (connfd < 0) {
             perror("socket");
             return -30;

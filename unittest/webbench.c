@@ -29,7 +29,7 @@ int Connect(const char* host, int port) {
         memcpy(&addr.sin_addr, phe->h_addr_list[0], phe->h_length);
     }
     addr.sin_port = htons(port);
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (sock < 0) {
         perror("socket");
         return -2;

@@ -12,7 +12,7 @@
 #include <arpa/inet.h>
 
 int ifconfig(std::vector<ifconfig_t>& ifcs) {
-    int sock = socket(AF_INET, SOCK_DGRAM, 0);
+    int sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if (sock < 0) {
         return -10;
     }

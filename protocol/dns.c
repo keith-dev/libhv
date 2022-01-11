@@ -238,7 +238,7 @@ int dns_query(dns_t* query, dns_t* response, const char* nameserver) {
 #ifdef OS_WIN
     WSAInit();
 #endif
-    int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    int sockfd = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if (sockfd < 0) {
         perror("socket");
         return ERR_SOCKET;
